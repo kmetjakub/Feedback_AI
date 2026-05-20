@@ -23,6 +23,7 @@ export default function Dashboard() {
   const [showForm, setShowForm] = useState(false);
   const [newName, setNewName] = useState("");
   const [copied, setCopied] = useState<number | null>(null);
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   async function fetchProjects() {
     setLoading(true);
@@ -64,6 +65,20 @@ export default function Dashboard() {
     navigator.clipboard.writeText(`${window.location.origin}/f/${project.slug}`);
     setCopied(project.id);
     setTimeout(() => setCopied(null), 2000);
+  }
+
+  async function handleDeleteProject(project: Project) {
+    const confirmed = window.confirm(
+      `Delete "${project.name}" and all its responses? This cannot be undone.`
+    );
+    if (!confirmed) return;
+    setDeleting(project.id);
+    try {
+      await fetch(`/api/projects/${project.id}`, { method: "DELETE" });
+      setProjects((prev) => prev.filter((p) => p.id !== project.id));
+    } finally {
+      setDeleting(null);
+    }
   }
 
   return (
@@ -158,6 +173,14 @@ export default function Dashboard() {
                     >
                       Open →
                     </Link>
+                    <button
+                      onClick={() => handleDeleteProject(project)}
+                      disabled={deleting === project.id}
+                      className="px-3 py-1.5 border border-[#2a2a2a] text-[#666] text-xs font-bold tracking-widest uppercase hover:border-red-800 hover:text-red-600 disabled:opacity-30 transition-colors"
+                      title="Delete project"
+                    >
+                      {deleting === project.id ? "..." : "Delete"}
+                    </button>
                   </div>
                 </div>
               </Bracket>

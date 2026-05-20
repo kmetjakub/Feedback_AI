@@ -163,7 +163,11 @@ export default function ProjectDetail() {
                   <span className="text-xs tracking-widest uppercase">Loading...</span>
                 </div>
               ) : (
-                <FeedbackList feedback={feedback} onRefresh={fetchData} />
+                <FeedbackList
+                  feedback={feedback}
+                  onRefresh={fetchData}
+                  onDelete={(id) => setFeedback((prev) => prev.filter((f) => f.id !== id))}
+                />
               )}
             </div>
           </div>

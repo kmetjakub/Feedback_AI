@@ -14,6 +14,7 @@ interface Feedback {
 interface FeedbackListProps {
   feedback: Feedback[];
   onRefresh: () => void;
+  onDelete?: (id: number) => void;
 }
 
 const CATEGORIES = ["All", "Bug", "Feature request", "General", "Compliment"];
@@ -25,13 +26,26 @@ const categoryBadge: Record<string, string> = {
   Compliment: "border-green-500 text-green-400",
 };
 
-export default function FeedbackList({ feedback, onRefresh }: FeedbackListProps) {
+export default function FeedbackList({ feedback, onRefresh, onDelete }: FeedbackListProps) {
   const [filter, setFilter] = useState("All");
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   const filtered = filter === "All" ? feedback : feedback.filter((f) => f.category === filter);
 
   function formatDate(iso: string) {
     return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  async function handleDelete(id: number) {
+    const confirmed = window.confirm("Delete this response? This cannot be undone.");
+    if (!confirmed) return;
+    setDeleting(id);
+    try {
+      await fetch(`/api/feedback/${id}`, { method: "DELETE" });
+      onDelete?.(id);
+    } finally {
+      setDeleting(null);
+    }
   }
 
   return (
@@ -76,7 +90,17 @@ export default function FeedbackList({ feedback, onRefresh }: FeedbackListProps)
                 <span className={`inline-block border px-2 py-0.5 text-xs font-bold tracking-widest uppercase ${categoryBadge[f.category] ?? "border-[#444] text-[#888]"}`}>
                   {f.category}
                 </span>
-                <span className="text-xs text-[#777] shrink-0 tracking-wide">{formatDate(f.createdAt)}</span>
+                <div className="flex items-center gap-3 shrink-0">
+                  <span className="text-xs text-[#777] tracking-wide">{formatDate(f.createdAt)}</span>
+                  <button
+                    onClick={() => handleDelete(f.id)}
+                    disabled={deleting === f.id}
+                    className="text-xs text-[#555] hover:text-red-600 disabled:opacity-30 transition-colors uppercase tracking-widest"
+                    title="Delete response"
+                  >
+                    {deleting === f.id ? "..." : "Delete"}
+                  </button>
+                </div>
               </div>
               <p className="text-sm text-[#ccc] leading-relaxed">{f.text}</p>
               {(f.name || f.email) && (
