@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
+import IntroScreen from "@/components/IntroScreen";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={spaceMono.className}>{children}</body>
+      <body className={spaceMono.className}>
+        <IntroScreen />
+        {children}
+      </body>
     </html>
   );
 }
