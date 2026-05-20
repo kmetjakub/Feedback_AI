@@ -73,7 +73,7 @@ export default function Dashboard() {
           <div>
             <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-2">// admin</p>
             <h1 className="text-4xl font-bold text-white uppercase tracking-tight">Dashboard</h1>
-            <p className="text-[#555] text-xs mt-1 tracking-widest uppercase">
+            <p className="text-[#999] text-xs mt-1 tracking-widest uppercase">
               {loading ? "Loading..." : `${projects.length} project${projects.length !== 1 ? "s" : ""}`}
             </p>
           </div>
@@ -121,7 +121,7 @@ export default function Dashboard() {
         )}
 
         {loading ? (
-          <div className="flex items-center justify-center py-24 text-[#444]">
+          <div className="flex items-center justify-center py-24 text-[#777]">
             <svg className="animate-spin h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
@@ -130,8 +130,8 @@ export default function Dashboard() {
           </div>
         ) : projects.length === 0 ? (
           <div className="text-center py-24 border border-[#1a1a1a]">
-            <p className="text-[#444] text-xs tracking-widest uppercase">No projects yet</p>
-            <p className="text-[#333] text-xs mt-2">Create your first project above.</p>
+            <p className="text-[#777] text-xs tracking-widest uppercase">No projects yet</p>
+            <p className="text-[#666] text-xs mt-2">Create your first project above.</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -140,7 +140,7 @@ export default function Dashboard() {
                 <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-5 flex items-center justify-between gap-4 group-hover:border-[#2a2a2a] transition-colors">
                   <div className="min-w-0">
                     <h2 className="font-bold text-white uppercase tracking-wide truncate">{project.name}</h2>
-                    <p className="text-xs text-[#555] mt-1 tracking-widest uppercase">
+                    <p className="text-xs text-[#999] mt-1 tracking-widest uppercase">
                       {project._count.feedback} response{project._count.feedback !== 1 ? "s" : ""} ·{" "}
                       {new Date(project.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                     </p>

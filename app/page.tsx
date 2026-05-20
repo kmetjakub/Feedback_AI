@@ -28,7 +28,7 @@ export default function Home() {
           </Link>
         </Bracket>
 
-        <p className="mt-16 text-xs text-[#333] tracking-widest uppercase">
+        <p className="mt-16 text-xs text-[#666] tracking-widest uppercase">
           Powered by Claude AI
         </p>
       </div>

@@ -47,10 +47,10 @@ export default function FeedbackForm({ projectId }: Props) {
           </svg>
         </div>
         <h2 className="text-xl font-bold text-white uppercase tracking-wide mb-2">Thank you</h2>
-        <p className="text-[#555] text-sm">Your feedback has been received.</p>
+        <p className="text-[#999] text-sm">Your feedback has been received.</p>
         <button
           onClick={() => { setSubmitted(false); setForm({ name: "", email: "", category: "General", text: "" }); }}
-          className="mt-6 text-xs text-[#555] hover:text-[#e8392a] uppercase tracking-widest underline transition-colors"
+          className="mt-6 text-xs text-[#999] hover:text-[#e8392a] uppercase tracking-widest underline transition-colors"
         >
           Submit another
         </button>
@@ -65,13 +65,13 @@ export default function FeedbackForm({ projectId }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold text-[#888] mb-2 tracking-widest uppercase">
-            Name <span className="text-[#444] normal-case">(optional)</span>
+            Name <span className="text-[#777] normal-case">(optional)</span>
           </label>
           <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className={inputCls} />
         </div>
         <div>
           <label className="block text-xs font-bold text-[#888] mb-2 tracking-widest uppercase">
-            Email <span className="text-[#444] normal-case">(optional)</span>
+            Email <span className="text-[#777] normal-case">(optional)</span>
           </label>
           <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" className={inputCls} />
         </div>

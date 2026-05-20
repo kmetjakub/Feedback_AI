@@ -54,7 +54,7 @@ export default function InsightsPanel({ feedbackTexts }: InsightsPanelProps) {
         <div>
           <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-1">// claude ai</p>
           <h2 className="text-lg font-bold text-white uppercase tracking-wide">AI Insights</h2>
-          <p className="text-xs text-[#555] mt-1 tracking-wide">
+          <p className="text-xs text-[#999] mt-1 tracking-wide">
             Analyzes all {feedbackTexts.length} response{feedbackTexts.length !== 1 ? "s" : ""}
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function InsightsPanel({ feedbackTexts }: InsightsPanelProps) {
       )}
 
       {!insights && !notConfigured && !error && !loading && feedbackTexts.length === 0 && (
-        <p className="text-xs text-[#444] tracking-widest uppercase">No feedback to analyze yet.</p>
+        <p className="text-xs text-[#777] tracking-widest uppercase">No feedback to analyze yet.</p>
       )}
     </div>
   );

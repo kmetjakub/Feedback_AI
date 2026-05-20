@@ -20,6 +20,7 @@ body {
 input, textarea, select {
   background-color: #0d0d0d !important;
   color: #fff !important;
+  font-family: inherit !important;
 }
 
 input::placeholder, textarea::placeholder {
