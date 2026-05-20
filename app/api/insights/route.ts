@@ -73,7 +73,8 @@ ${feedbackTexts.map((t: string, i: number) => `${i + 1}. ${t}`).join("\n")}`;
     const content = message.content[0];
     if (content.type !== "text") throw new Error("Unexpected response type from Claude");
 
-    const insights = JSON.parse(content.text);
+    const raw = content.text.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
+    const insights = JSON.parse(raw);
 
     if (projectId) {
       await prisma.insight.upsert({
