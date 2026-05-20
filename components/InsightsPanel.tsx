@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Bracket from "@/components/Bracket";
 
 interface Insights {
   sentiment: "positive" | "mixed" | "negative";
@@ -14,9 +15,9 @@ interface InsightsPanelProps {
 }
 
 const sentimentConfig = {
-  positive: { label: "Positive", className: "text-green-700 bg-green-50 border-green-200" },
-  mixed: { label: "Mixed", className: "text-yellow-700 bg-yellow-50 border-yellow-200" },
-  negative: { label: "Negative", className: "text-red-700 bg-red-50 border-red-200" },
+  positive: { label: "Positive", cls: "border-green-500 text-green-400" },
+  mixed: { label: "Mixed", cls: "border-yellow-500 text-yellow-400" },
+  negative: { label: "Negative", cls: "border-[#e8392a] text-[#e8392a]" },
 };
 
 export default function InsightsPanel({ feedbackTexts }: InsightsPanelProps) {
@@ -30,101 +31,94 @@ export default function InsightsPanel({ feedbackTexts }: InsightsPanelProps) {
     setError("");
     setInsights(null);
     setNotConfigured(false);
-
     try {
       const res = await fetch("/api/insights", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feedbackTexts }),
       });
-
       const data = await res.json();
-
-      if (data.error === "not_configured") {
-        setNotConfigured(true);
-        return;
-      }
-
-      if (!res.ok || data.error) {
-        setError(data.error ?? "Failed to generate insights. Please try again.");
-        return;
-      }
-
+      if (data.error === "not_configured") { setNotConfigured(true); return; }
+      if (!res.ok || data.error) { setError(data.error ?? "Failed to generate insights."); return; }
       setInsights(data);
     } catch {
-      setError("Network error. Please check your connection.");
+      setError("Network error. Check your connection.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="border border-gray-200 rounded-xl p-6 bg-white">
-      <div className="flex items-center justify-between mb-4">
+    <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-6">
+      <div className="flex items-start justify-between mb-6 gap-4">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">AI Insights</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Powered by Claude · analyzes all {feedbackTexts.length} responses</p>
+          <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-1">// claude ai</p>
+          <h2 className="text-lg font-bold text-white uppercase tracking-wide">AI Insights</h2>
+          <p className="text-xs text-[#555] mt-1 tracking-wide">
+            Analyzes all {feedbackTexts.length} response{feedbackTexts.length !== 1 ? "s" : ""}
+          </p>
         </div>
-        <button
-          onClick={generate}
-          disabled={loading || feedbackTexts.length === 0}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-        >
-          {loading && (
-            <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-            </svg>
-          )}
-          {loading ? "Analyzing..." : "Generate insights"}
-        </button>
+        <Bracket className="shrink-0">
+          <button
+            onClick={generate}
+            disabled={loading || feedbackTexts.length === 0}
+            className="flex items-center gap-2 border border-[#333] text-white px-5 py-2.5 text-xs font-bold tracking-widest uppercase hover:border-[#e8392a] hover:text-[#e8392a] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            {loading && (
+              <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+              </svg>
+            )}
+            {loading ? "Analyzing..." : "Generate insights"}
+          </button>
+        </Bracket>
       </div>
 
       {notConfigured && (
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
-          <strong>API key not configured.</strong> Add your{" "}
-          <code className="font-mono bg-amber-100 px-1 rounded">ANTHROPIC_API_KEY</code> in Vercel environment
-          variables to enable AI insights.
+        <div className="border border-yellow-500/30 bg-yellow-500/5 p-4 text-xs text-yellow-400">
+          <span className="font-bold uppercase tracking-widest">API key not configured.</span>{" "}
+          Add your <code className="font-mono bg-[#1a1a1a] px-1">ANTHROPIC_API_KEY</code> in Vercel environment variables.
         </div>
       )}
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">{error}</div>
+        <div className="border border-[#e8392a]/30 bg-[#e8392a]/5 p-4 text-xs text-[#e8392a]">{error}</div>
       )}
 
       {insights && (
-        <div className="space-y-4 mt-2">
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-medium ${sentimentConfig[insights.sentiment]?.className}`}>
-            Overall sentiment: {sentimentConfig[insights.sentiment]?.label}
+        <div className="space-y-5 mt-2">
+          <div className={`inline-flex items-center gap-2 border px-3 py-1.5 text-xs font-bold tracking-widest uppercase ${sentimentConfig[insights.sentiment]?.cls}`}>
+            Sentiment: {sentimentConfig[insights.sentiment]?.label}
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Top themes</h3>
-            <ul className="space-y-1.5">
+            <p className="text-xs font-bold text-[#888] uppercase tracking-widest mb-3">Top themes</p>
+            <div className="space-y-2">
               {insights.themes.map((theme, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs flex items-center justify-center font-medium">{i + 1}</span>
+                <div key={i} className="flex items-start gap-3 text-sm text-[#ccc]">
+                  <span className="text-[#e8392a] font-bold text-xs mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
                   {theme}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="bg-red-50 border border-red-100 rounded-lg p-3">
-              <p className="text-xs font-medium text-red-600 mb-1">Most urgent issue</p>
-              <p className="text-sm text-gray-800">{insights.urgentIssue}</p>
+            <div className="border border-[#e8392a]/30 bg-[#e8392a]/5 p-4">
+              <p className="text-xs font-bold text-[#e8392a] uppercase tracking-widest mb-2">Most urgent issue</p>
+              <p className="text-sm text-[#ccc]">{insights.urgentIssue}</p>
             </div>
-            <div className="bg-green-50 border border-green-100 rounded-lg p-3">
-              <p className="text-xs font-medium text-green-600 mb-1">Recommended next action</p>
-              <p className="text-sm text-gray-800">{insights.nextAction}</p>
+            <div className="border border-green-500/30 bg-green-500/5 p-4">
+              <p className="text-xs font-bold text-green-400 uppercase tracking-widest mb-2">Recommended next action</p>
+              <p className="text-sm text-[#ccc]">{insights.nextAction}</p>
             </div>
           </div>
         </div>
       )}
 
       {!insights && !notConfigured && !error && !loading && feedbackTexts.length === 0 && (
-        <p className="text-sm text-gray-400">No feedback to analyze yet.</p>
+        <p className="text-xs text-[#444] tracking-widest uppercase">No feedback to analyze yet.</p>
       )}
     </div>
   );

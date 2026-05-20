@@ -1,26 +1,36 @@
 import Link from "next/link";
+import Bracket from "@/components/Bracket";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-4">
-      <div className="max-w-lg w-full text-center">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600 mb-6">
-          <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-        </div>
-
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">We'd love your feedback</h1>
-        <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-          Help us build something better. Share what's on your mind — it takes 2 minutes.
+    <main className="flex min-h-screen items-center justify-center px-6">
+      <div className="max-w-2xl w-full">
+        <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-6">
+          // feedback collection
         </p>
 
-        <Link
-          href="/feedback"
-          className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors text-center"
-        >
-          Share your feedback
-        </Link>
+        <h1 className="text-5xl sm:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
+          FEEDBACK<br />
+          <span className="text-[#e8392a]">AI</span>
+        </h1>
+
+        <p className="text-[#888] text-sm leading-relaxed mb-10 max-w-md">
+          Collect feedback from anyone on the web.<br />
+          Get instant AI-powered insights — no manual reading required.
+        </p>
+
+        <Bracket className="inline-block">
+          <Link
+            href="/feedback"
+            className="inline-block bg-transparent border border-[#333] text-white px-8 py-3 text-sm font-bold tracking-widest uppercase hover:border-[#e8392a] hover:text-[#e8392a] transition-colors"
+          >
+            Share your feedback
+          </Link>
+        </Bracket>
+
+        <p className="mt-16 text-xs text-[#333] tracking-widest uppercase">
+          Powered by Claude AI
+        </p>
       </div>
     </main>
   );

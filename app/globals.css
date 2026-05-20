@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #080808;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+::selection {
+  background: #e8392a;
+  color: #fff;
+}
+
+input, textarea, select {
+  background-color: #0d0d0d !important;
+  color: #fff !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #444 !important;
+}
+
+select option {
+  background-color: #0d0d0d;
+  color: #fff;
+}
