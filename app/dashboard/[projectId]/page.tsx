@@ -90,7 +90,7 @@ export default function ProjectDetail() {
               </svg>
               All projects
             </Link>
-            <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-2">// project</p>
+            <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-2">{"// project"}</p>
             <h1 className="text-4xl font-bold text-white uppercase tracking-tight">{project?.name ?? "—"}</h1>
             <p className="text-[#999] text-xs mt-1 tracking-widest uppercase">
               {loading ? "Loading..." : `${feedback.length} response${feedback.length !== 1 ? "s" : ""} total`}

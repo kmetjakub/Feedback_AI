@@ -15,7 +15,7 @@ export default function FeedbackPage() {
           </svg>
           Back
         </Link>
-        <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-3">// input</p>
+        <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-3">{"// input"}</p>
         <h1 className="text-3xl font-bold text-white mb-1 uppercase tracking-tight">Share your feedback</h1>
         <p className="text-[#999] text-sm mb-8">Your input helps us build a better product.</p>
 

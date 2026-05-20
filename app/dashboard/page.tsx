@@ -86,7 +86,7 @@ export default function Dashboard() {
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
-            <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-2">// admin</p>
+            <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-2">{"// admin"}</p>
             <h1 className="text-4xl font-bold text-white uppercase tracking-tight">Dashboard</h1>
             <p className="text-[#999] text-xs mt-1 tracking-widest uppercase">
               {loading ? "Loading..." : `${projects.length} project${projects.length !== 1 ? "s" : ""}`}
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
         {showForm && (
           <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-5">
-            <p className="text-[#e8392a] text-xs tracking-widest uppercase mb-4">// create project</p>
+            <p className="text-[#e8392a] text-xs tracking-widest uppercase mb-4">{"// create project"}</p>
             <form onSubmit={handleCreate} className="flex gap-3">
               <input
                 autoFocus

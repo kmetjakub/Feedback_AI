@@ -6,7 +6,7 @@ export default function Home() {
     <main className="flex min-h-screen items-center justify-center px-6">
       <div className="max-w-2xl w-full">
         <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-6">
-          // feedback collection
+          {"// feedback collection"}
         </p>
 
         <h1 className="text-5xl sm:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">

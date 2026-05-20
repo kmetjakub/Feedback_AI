@@ -52,7 +52,7 @@ export default function InsightsPanel({ feedbackTexts }: InsightsPanelProps) {
     <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-6">
       <div className="flex items-start justify-between mb-6 gap-4">
         <div>
-          <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-1">// claude ai</p>
+          <p className="text-[#e8392a] text-xs tracking-[0.3em] uppercase mb-1">{"// claude ai"}</p>
           <h2 className="text-lg font-bold text-white uppercase tracking-wide">AI Insights</h2>
           <p className="text-xs text-[#999] mt-1 tracking-wide">
             Analyzes all {feedbackTexts.length} response{feedbackTexts.length !== 1 ? "s" : ""}
