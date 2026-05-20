@@ -132,7 +132,7 @@ export default function ProjectDetail() {
 
         {/* Tab content */}
         {tab === "insights" && (
-          <InsightsPanel feedbackTexts={feedback.map((f) => f.text)} />
+          <InsightsPanel feedbackTexts={feedback.map((f) => f.text)} projectId={parseInt(projectId)} />
         )}
 
         {tab === "responses" && (

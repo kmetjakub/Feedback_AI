@@ -1,0 +1,16 @@
+category,feedback
+Bug,The dropdown menu in the header doesn't close when I click outside of it. Pretty annoying when navigating.
+Compliment,Love the new dark theme — it's much easier on the eyes during long work sessions.
+Feature request,Would be great to have a light mode option. The dark background is too harsh for me in bright office environments.
+Bug,On mobile the navigation bar overlaps the page content when I scroll down. Makes some buttons unreachable.
+General,The new layout feels cleaner overall but I had to spend a few minutes figuring out where everything moved.
+Feature request,Please add keyboard shortcuts. Power users like me rely heavily on them and the new UI removed the ones I used.
+Compliment,Page load time is noticeably faster compared to the old design. Great improvement!
+Bug,The modal dialog doesn't trap focus properly — pressing Tab jumps outside the modal to background elements.
+General,Font size feels slightly too small on the detail pages. Had to zoom in on my laptop screen.
+Feature request,It would help to have breadcrumb navigation so I always know where I am inside the app.
+Compliment,The new color palette is consistent throughout the whole app. Previous version felt patchy and inconsistent.
+Bug,Clicking the Save button twice submits the form twice. Needs a loading state to prevent duplicate submissions.
+General,Transition animations feel a bit slow. Would prefer a snappier experience especially when switching between tabs.
+Feature request,Can you add the option to collapse the sidebar? On smaller screens it takes up too much space.
+Compliment,The new empty state illustrations are a nice touch. Much better than just showing a blank white area.
