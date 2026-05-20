@@ -4,7 +4,11 @@ import { useState } from "react";
 
 const CATEGORIES = ["Bug", "Feature request", "General", "Compliment"];
 
-export default function FeedbackForm() {
+interface Props {
+  projectId?: number;
+}
+
+export default function FeedbackForm({ projectId }: Props) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -29,7 +33,7 @@ export default function FeedbackForm() {
       const res = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, projectId }),
       });
 
       if (!res.ok) {

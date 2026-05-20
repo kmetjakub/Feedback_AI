@@ -8,9 +8,13 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
+    const projectId = searchParams.get("projectId");
 
     const feedback = await prisma.feedback.findMany({
-      where: category ? { category } : undefined,
+      where: {
+        ...(category ? { category } : {}),
+        ...(projectId ? { projectId: parseInt(projectId) } : {}),
+      },
       orderBy: { createdAt: "desc" },
     });
 
@@ -26,7 +30,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, category, text } = body;
+    const { name, email, category, text, projectId } = body;
 
     if (!text || typeof text !== "string" || text.trim().length === 0) {
       return NextResponse.json(
@@ -48,6 +52,7 @@ export async function POST(request: NextRequest) {
         email: email?.trim() || null,
         category,
         text: text.trim(),
+        ...(projectId ? { projectId: parseInt(projectId) } : {}),
       },
     });
 

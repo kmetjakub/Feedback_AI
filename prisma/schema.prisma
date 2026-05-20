@@ -7,6 +7,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Project {
+  id        Int        @id @default(autoincrement())
+  name      String
+  slug      String     @unique
+  createdAt DateTime   @default(now())
+  feedback  Feedback[]
+}
+
 model Feedback {
   id        Int      @id @default(autoincrement())
   name      String?
@@ -14,4 +22,6 @@ model Feedback {
   category  String
   text      String
   createdAt DateTime @default(now())
+  projectId Int?
+  project   Project? @relation(fields: [projectId], references: [id])
 }

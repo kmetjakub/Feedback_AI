@@ -10,29 +10,17 @@ export default function Home() {
           </svg>
         </div>
 
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">FeedbackAI</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-3">We'd love your feedback</h1>
         <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-          Collect feedback from anyone on the web and get instant AI-powered insights — without reading hundreds of responses manually.
+          Help us build something better. Share what's on your mind — it takes 2 minutes.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href="/feedback"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors text-center"
-          >
-            Send feedback
-          </Link>
-          <Link
-            href="/dashboard"
-            className="bg-white text-gray-700 px-6 py-3 rounded-lg font-medium border border-gray-200 hover:bg-gray-50 transition-colors text-center"
-          >
-            Open dashboard
-          </Link>
-        </div>
-
-        <p className="mt-10 text-xs text-gray-400">
-          Built for product managers · Powered by Claude AI
-        </p>
+        <Link
+          href="/feedback"
+          className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors text-center"
+        >
+          Share your feedback
+        </Link>
       </div>
     </main>
   );

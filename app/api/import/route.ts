@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
+    const projectIdRaw = formData.get("projectId");
+    const projectId = projectIdRaw ? parseInt(projectIdRaw as string) : null;
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
@@ -50,6 +52,7 @@ export async function POST(request: NextRequest) {
         text: row.feedback.trim(),
         name: row.name?.trim() || null,
         email: row.email?.trim() || null,
+        ...(projectId ? { projectId } : {}),
       })),
     });
 

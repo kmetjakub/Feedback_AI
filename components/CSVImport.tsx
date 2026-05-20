@@ -4,9 +4,10 @@ import { useRef, useState } from "react";
 
 interface CSVImportProps {
   onImported: () => void;
+  projectId?: number;
 }
 
-export default function CSVImport({ onImported }: CSVImportProps) {
+export default function CSVImport({ onImported, projectId }: CSVImportProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -21,6 +22,7 @@ export default function CSVImport({ onImported }: CSVImportProps) {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      if (projectId) formData.append("projectId", String(projectId));
 
       const res = await fetch("/api/import", { method: "POST", body: formData });
       const data = await res.json();
