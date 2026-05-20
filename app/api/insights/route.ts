@@ -33,7 +33,7 @@ Feedback entries:
 ${feedbackTexts.map((t: string, i: number) => `${i + 1}. ${t}`).join("\n")}`;
 
     const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-sonnet-4-6",
       max_tokens: 1024,
       messages: [{ role: "user", content: prompt }],
     });
