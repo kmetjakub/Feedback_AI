@@ -12,6 +12,7 @@ export async function DELETE(
   try {
     await prisma.$transaction([
       prisma.feedback.deleteMany({ where: { projectId: id } }),
+      prisma.insight.deleteMany({ where: { projectId: id } }),
       prisma.project.delete({ where: { id } }),
     ]);
     return NextResponse.json({ ok: true });
