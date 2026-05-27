@@ -116,7 +116,7 @@ export default function Dashboard() {
               {loading ? "Loading..." : `${projects.length} project${projects.length !== 1 ? "s" : ""}`}
             </p>
           </div>
-          <div className="flex items-center gap-3 self-start">
+          <div className="flex items-center gap-3 self-start flex-wrap">
             <button
               onClick={() => setShowGuide(!showGuide)}
               className="flex items-center gap-2 border border-[#2a2a2a] text-[#888] px-4 py-2.5 text-xs font-bold tracking-widest uppercase hover:border-[#555] hover:text-[#999] transition-colors"
@@ -180,7 +180,7 @@ export default function Dashboard() {
         {showForm && (
           <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-5">
             <p className="text-[#e8392a] text-xs tracking-widest uppercase mb-4">{"// create project"}</p>
-            <form onSubmit={handleCreate} className="flex gap-3">
+            <form onSubmit={handleCreate} className="flex gap-3 flex-wrap sm:flex-nowrap">
               <input
                 autoFocus
                 type="text"
@@ -225,15 +225,15 @@ export default function Dashboard() {
           <div className="space-y-3">
             {projects.map((project) => (
               <Bracket key={project.id} className="group">
-                <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-5 flex items-center justify-between gap-4 group-hover:border-[#2a2a2a] transition-colors">
+                <div className="border border-[#1e1e1e] bg-[#0d0d0d] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group-hover:border-[#2a2a2a] transition-colors">
                   <div className="min-w-0">
                     <h2 className="font-bold text-white uppercase tracking-wide truncate">{project.name}</h2>
-                    <p className="text-xs text-[#999] mt-1 tracking-widest uppercase">
+                    <p className="text-xs text-[#999] mt-1 tracking-widest uppercase whitespace-nowrap">
                       {project._count.feedback} response{project._count.feedback !== 1 ? "s" : ""} ·{" "}
                       {new Date(project.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <button
                       onClick={() => copyLink(project)}
                       className="flex items-center gap-1.5 px-3 py-1.5 border border-[#2a2a2a] text-[#888] text-xs font-bold tracking-widest uppercase hover:border-[#e8392a] hover:text-[#e8392a] transition-colors"
